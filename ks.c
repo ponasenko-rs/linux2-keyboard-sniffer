@@ -49,6 +49,8 @@ static int __init ks_init(void) {
 }
 
 static void __exit ks_exit(void) {
+	printk(KERN_INFO "ks: exit\n");
+
 	del_timer(&timer);
 
 	tasklet_kill(&presses_counter);
@@ -56,8 +58,6 @@ static void __exit ks_exit(void) {
 	disable_irq(KB_IRQ);
 	free_irq(KB_IRQ, &presses_counter);
 	enable_irq(KB_IRQ);
-
-	printk(KERN_INFO "ks: exit\n");
 }
 
 module_init(ks_init);
